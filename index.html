@@ -37,7 +37,7 @@
 
     .game-card {
       background-color: white;
-      width: 220px;
+      width: 220px;  
       height: 320px;
       border-radius: 15px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -47,7 +47,7 @@
     }
 
     .game-card:hover {
-      transform: scale(1.05);
+      transform: scale(1.05);  
     }
 
     .game-card img {
@@ -100,10 +100,6 @@
       background-color: #357ae8;
     }
 
-    .game-card-content .tags span {
-      margin-right: 8px;
-    }
-
     /* Add animations for the game card and button */
     .game-card, button {
       opacity: 0;
@@ -133,46 +129,22 @@
       }
     }
 
-    /* Modal Style */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
+    /* Styles for iframe container */
+    .game-iframe-container {
+      width: 100%;
+      max-width: 800px;
+      height: 450px;
+      margin: 20px auto;
+      border-radius: 10px;
+      overflow: hidden;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    iframe {
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .modal-content {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      width: 80%;
-      max-width: 800px;
-      position: relative;
-    }
-
-    .modal iframe {
-      width: 100%;
-      height: 450px;
       border: none;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #ff0000;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 18px;
-      padding: 5px 10px;
-      cursor: pointer;
     }
   </style>
 </head>
@@ -180,8 +152,8 @@
   <h1>Choose Your Game</h1>
 
   <div class="game-container">
-    <!-- Game Card 1 (Egg Car Racing) -->
-    <div class="game-card">
+    <!-- Game Card 1 -->
+    <div class="game-card" onclick="loadGame('https://cloud.onlinegames.io/games/2024/construct/289/egg-car-racing/index-og.html')">
       <img src="https://www.onlinegames.io/media/posts/910/responsive/egg-car-racing-xs.jpg" alt="Egg Car Racing">
       <div class="game-card-content">
         <h3>Egg Car Racing</h3>
@@ -191,12 +163,12 @@
           <span>Car</span>
           <span>Physics</span>
         </div>
-        <button onclick="loadGame('https://cloud.onlinegames.io/games/2024/construct/289/egg-car-racing/index-og.html')">Play Now</button>
+        <button>Play Now</button>
       </div>
     </div>
 
-    <!-- Game Card 2 (Drift King) -->
-    <div class="game-card">
+    <!-- Game Card 2 -->
+    <div class="game-card" onclick="loadGame('https://www.onlinegames.io/games/2024/unity/drift-king/index.html')">
       <img src="https://www.onlinegames.io/media/posts/729/responsive/Drift-King-xs.jpg" alt="Drift King">
       <div class="game-card-content">
         <h3>Drift King</h3>
@@ -206,45 +178,37 @@
           <span>Drift</span>
           <span>Simulator</span>
         </div>
-        <button onclick="loadGame('https://www.onlinegames.io/games/2024/unity/drift-king/index.html')">Play Now</button>
+        <button>Play Now</button>
       </div>
     </div>
 
-    <!-- Game Card 3 (Block Blast) -->
-    <div class="game-card">
+    <!-- Game Card 3 -->
+    <div class="game-card" onclick="loadGame('https://cloud.onlinegames.io/games/2024/unity3/block-blast/index-og.html')">
       <img src="https://www.onlinegames.io/media/posts/876/responsive/block-blast-xs.jpg" alt="Block Blast">
       <div class="game-card-content">
         <h3>Block Blast</h3>
-        <p>Endless Tetris fun with no time pressure! Relax and place the blocks in the grid.</p>
+        <p>Relax and enjoy this endless Tetris-like game with no time limits!</p>
         <div class="tags">
-          <span>1-Player</span>
           <span>2D</span>
           <span>Puzzle</span>
+          <span>Arcade</span>
         </div>
-        <button onclick="loadGame('https://cloud.onlinegames.io/games/2024/unity3/block-blast/index-og.html')">Play Now</button>
+        <button>Play Now</button>
       </div>
     </div>
   </div>
 
-  <!-- Modal for Overlaying the Game -->
-  <div id="gameModal" class="modal">
-    <div class="modal-content">
-      <button class="close-btn" onclick="closeModal()">X</button>
-      <iframe id="gameFrame" src="" frameborder="0"></iframe>
-    </div>
+  <!-- Iframe Container (Where the Game Will Load) -->
+  <div class="game-iframe-container" id="game-iframe-container">
+    <iframe id="game-iframe" src="" frameborder="0"></iframe>
   </div>
 
   <script>
-    // Function to load the selected game into the modal
+    // Function to load the selected game inside the iframe
     function loadGame(url) {
-      document.getElementById('gameFrame').src = url;
-      document.getElementById('gameModal').style.display = 'flex';
-    }
-
-    // Function to close the modal
-    function closeModal() {
-      document.getElementById('gameModal').style.display = 'none';
-      document.getElementById('gameFrame').src = ''; // Stop the game
+      const iframe = document.getElementById("game-iframe");
+      iframe.src = url;
+      document.getElementById("game-iframe-container").style.display = "block";
     }
   </script>
 </body>
