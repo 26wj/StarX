@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game Selection</title>
   <style>
+    /* Basic Styling */
     * {
       margin: 0;
       padding: 0;
@@ -15,39 +16,51 @@
       font-family: Arial, sans-serif;
       background-color: #f5f5f5;
       color: #333;
-      padding: 0;
-      margin: 0;
+      text-align: center;
+      padding-top: 50px;
     }
 
     h1 {
-      text-align: center;
-      margin-top: 30px;
-      font-size: 2.5rem;
-      color: #333;
+      margin-bottom: 20px;
     }
 
+    /* Search Bar */
+    .search-container {
+      margin-bottom: 30px;
+    }
+
+    .search-bar {
+      width: 50%;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    /* Game Container */
     .game-container {
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
-      margin-top: 30px;
       gap: 20px;
       padding: 0 20px;
     }
 
+    /* Game Cards */
     .game-card {
       background-color: white;
-      width: 220px;  
+      width: 220px;
       height: 320px;
       border-radius: 15px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       overflow: hidden;
       transition: transform 0.3s ease;
       cursor: pointer;
+      text-align: center;
     }
 
     .game-card:hover {
-      transform: scale(1.05);  
+      transform: scale(1.05);
     }
 
     .game-card img {
@@ -59,29 +72,18 @@
     .game-card-content {
       padding: 15px;
       height: 140px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
     }
 
     .game-card-content h3 {
       font-size: 1.25rem;
-      margin-bottom: 10px;
       color: #4CAF50;
     }
 
     .game-card-content p {
       font-size: 0.9rem;
       color: #555;
-      margin-bottom: 10px;
       height: 50px;
       overflow: hidden;
-    }
-
-    .game-card-content .tags {
-      font-size: 0.8rem;
-      color: #777;
-      margin-bottom: 10px;
     }
 
     .game-card-content button {
@@ -93,123 +95,140 @@
       border-radius: 5px;
       cursor: pointer;
       font-size: 0.9rem;
-      transition: background-color 0.3s;
     }
 
     .game-card-content button:hover {
       background-color: #357ae8;
     }
 
-    /* Add animations for the game card and button */
-    .game-card, button {
-      opacity: 0;
-      animation: fadeInUp 0.8s forwards;
-    }
-
-    .game-card:nth-child(1) {
-      animation-delay: 0.2s;
-    }
-
-    .game-card:nth-child(2) {
-      animation-delay: 0.4s;
-    }
-
-    .game-card:nth-child(3) {
-      animation-delay: 0.6s;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Styles for iframe container */
-    .game-iframe-container {
-      width: 100%;
-      max-width: 800px;
-      height: 450px;
-      margin: 20px auto;
-      border-radius: 10px;
-      overflow: hidden;
+    /* Fullscreen Button */
+    .fullscreen-btn {
+      background-color: #00aaff;
+      padding: 10px;
+      color: white;
       border: none;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 15px;
     }
 
-    iframe {
+    .fullscreen-btn:hover {
+      background-color: #0088cc;
+    }
+
+    /* Game Embed Styling */
+    .game-frame {
       width: 100%;
-      height: 100%;
+      height: 600px;
       border: none;
     }
   </style>
 </head>
 <body>
+
   <h1>Choose Your Game</h1>
 
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" class="search-bar" id="gameSearch" placeholder="Search for games...">
+  </div>
+
+  <!-- Game Container -->
   <div class="game-container">
-    <!-- Game Card 1 -->
-    <div class="game-card" onclick="loadGame('https://cloud.onlinegames.io/games/2024/construct/289/egg-car-racing/index-og.html')">
+    <!-- Egg Car Racing -->
+    <div class="game-card">
       <img src="https://www.onlinegames.io/media/posts/910/responsive/egg-car-racing-xs.jpg" alt="Egg Car Racing">
       <div class="game-card-content">
         <h3>Egg Car Racing</h3>
         <p>Navigate a fragile egg safely through tricky terrains. A fun, quirky driving game!</p>
-        <div class="tags">
-          <span>2D</span>
-          <span>Car</span>
-          <span>Physics</span>
-        </div>
-        <button>Play Now</button>
+        <button onclick="loadGame('egg-car-racing')">Play Now</button>
       </div>
     </div>
 
-    <!-- Game Card 2 -->
-    <div class="game-card" onclick="loadGame('https://www.onlinegames.io/games/2024/unity/drift-king/index.html')">
+    <!-- Drift King -->
+    <div class="game-card">
       <img src="https://www.onlinegames.io/media/posts/729/responsive/Drift-King-xs.jpg" alt="Drift King">
       <div class="game-card-content">
         <h3>Drift King</h3>
         <p>Experience the thrill of drifting with realistic 3D visuals and customizable cars.</p>
-        <div class="tags">
-          <span>3D</span>
-          <span>Drift</span>
-          <span>Simulator</span>
-        </div>
-        <button>Play Now</button>
+        <button onclick="loadGame('drift-king')">Play Now</button>
       </div>
     </div>
 
-    <!-- Game Card 3 -->
-    <div class="game-card" onclick="loadGame('https://cloud.onlinegames.io/games/2024/unity3/block-blast/index-og.html')">
+    <!-- Block Blast -->
+    <div class="game-card">
       <img src="https://www.onlinegames.io/media/posts/876/responsive/block-blast-xs.jpg" alt="Block Blast">
       <div class="game-card-content">
         <h3>Block Blast</h3>
-        <p>Relax and enjoy this endless Tetris-like game with no time limits!</p>
-        <div class="tags">
-          <span>2D</span>
-          <span>Puzzle</span>
-          <span>Arcade</span>
-        </div>
-        <button>Play Now</button>
+        <p>Relax and play a non-time-limited Tetris-style game. Easy and fun puzzle solving.</p>
+        <button onclick="loadGame('block-blast')">Play Now</button>
       </div>
     </div>
   </div>
 
-  <!-- Iframe Container (Where the Game Will Load) -->
-  <div class="game-iframe-container" id="game-iframe-container">
-    <iframe id="game-iframe" src="" frameborder="0"></iframe>
-  </div>
+  <!-- Embed the Game Here -->
+  <div id="gameFrameContainer"></div>
 
+  <!-- JavaScript -->
   <script>
-    // Function to load the selected game inside the iframe
-    function loadGame(url) {
-      const iframe = document.getElementById("game-iframe");
-      iframe.src = url;
-      document.getElementById("game-iframe-container").style.display = "block";
+    // Array of games
+    const games = {
+      'egg-car-racing': {
+        url: 'https://cloud.onlinegames.io/games/2024/construct/289/egg-car-racing/index-og.html', // Remote game URL
+        title: 'Egg Car Racing'
+      },
+      'drift-king': {
+        url: 'https://www.onlinegames.io/games/2024/unity/drift-king/index.html', // Remote game URL
+        title: 'Drift King'
+      },
+      'block-blast': {
+        url: 'https://cloud.onlinegames.io/games/2024/unity3/block-blast/index-og.html', // Remote game URL
+        title: 'Block Blast'
+      }
+    };
+
+    // Load Game Function
+    function loadGame(gameKey) {
+      const game = games[gameKey];
+      if (game) {
+        const gameFrameContainer = document.getElementById('gameFrameContainer');
+        gameFrameContainer.innerHTML = `
+          <h2>${game.title}</h2>
+          <iframe class="game-frame" src="${game.url}" allowfullscreen></iframe>
+          <button class="fullscreen-btn" onclick="toggleFullscreen()">Fullscreen</button>
+        `;
+      }
     }
+
+    // Fullscreen Toggle
+    function toggleFullscreen() {
+      const iframe = document.querySelector('.game-frame');
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.mozRequestFullScreen) {
+        iframe.mozRequestFullScreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+      }
+    }
+
+    // Search Game Function
+    document.getElementById('gameSearch').addEventListener('input', function(event) {
+      const searchTerm = event.target.value.toLowerCase();
+      const gameCards = document.querySelectorAll('.game-card');
+      gameCards.forEach(function(card) {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        if (title.includes(searchTerm)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
   </script>
+
 </body>
 </html>
