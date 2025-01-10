@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game Selection</title>
   <style>
-    /* Basic Styling */
     * {
       margin: 0;
       padding: 0;
@@ -118,6 +117,11 @@
     }
 
     /* Game Embed Styling */
+    .game-frame-container {
+      margin-top: 30px;
+      position: relative;
+    }
+
     .game-frame {
       width: 100%;
       height: 600px;
@@ -165,30 +169,128 @@
         <button onclick="loadGame('block-blast')">Play Now</button>
       </div>
     </div>
+
+    <!-- Hero Rush Tower Defense -->
+    <div class="game-card">
+      <img src="https://www.onlinegames.io/media/posts/491/responsive/Hero-Rush-Tower-Defense-Play-xs.jpg" alt="Hero Rush Tower Defense">
+      <div class="game-card-content">
+        <h3>Hero Rush Tower Defense</h3>
+        <p>Build and upgrade towers to defend your land from attack waves in this 2D strategy game.</p>
+        <button onclick="loadGame('hero-rush-tower-defense')">Play Now</button>
+      </div>
+    </div>
+
+    <!-- Alien Sky Invasion -->
+    <div class="game-card">
+      <img src="https://www.onlinegames.io/media/posts/594/responsive/Alien-Sky-Invasion-xs.jpg" alt="Alien Sky Invasion">
+      <div class="game-card-content">
+        <h3>Alien Sky Invasion</h3>
+        <p>Steer a jet aircraft in space and defend against alien attacks in this 3D flying game.</p>
+        <button onclick="loadGame('alien-sky-invasion')">Play Now</button>
+      </div>
+    </div>
+
+    <!-- Troll Level -->
+    <div class="game-card">
+      <img src="https://www.onlinegames.io/media/posts/857/responsive/troll-level-online-xs.jpg" alt="Troll Level">
+      <div class="game-card-content">
+        <h3>Troll Level</h3>
+        <p>A hilarious and frustrating game that will have you laughing as you fail at every step.</p>
+        <button onclick="loadGame('troll-level')">Play Now</button>
+      </div>
+    </div>
+
+    <!-- Highway Racer 2 -->
+    <div class="game-card">
+      <img src="https://www.onlinegames.io/media/posts/323/responsive/Highway-Racer-2-xs.jpg" alt="Highway Racer 2">
+      <div class="game-card-content">
+        <h3>Highway Racer 2</h3>
+        <p>Race your car on the highway while avoiding traffic and speeding through intense scenarios.</p>
+        <button onclick="loadGame('highway-racer-2')">Play Now</button>
+      </div>
+    </div>
+
+    <!-- Bus Subway Runner -->
+    <div class="game-card">
+      <img src="https://www.onlinegames.io/media/posts/235/responsive/Bus-Subway-Runner-Game-xs.jpg" alt="Bus Subway Runner">
+      <div class="game-card-content">
+        <h3>Bus Subway Runner</h3>
+        <p>Race through the subway and avoid buses in this exciting, endless runner game.</p>
+        <button onclick="loadGame('bus-subway-runner')">Play Now</button>
+      </div>
+    </div>
+
+    <!-- Subway Idle 3D -->
+    <div class="game-card">
+      <img src="https://www.onlinegames.io/media/posts/586/responsive/Subway-Idle-xs.jpg" alt="Subway Idle 3D">
+      <div class="game-card-content">
+        <h3>Subway Idle 3D</h3>
+        <p>Run an underground subway network in New York City. A strategic idle simulator game.</p>
+        <button onclick="loadGame('subway-idle-3d')">Play Now</button>
+      </div>
+    </div>
+
+    <!-- 2 Player Crazy Racer -->
+    <div class="game-card">
+      <img src="https://www.onlinegames.io/media/posts/617/responsive/2-Player-Crazy-Racer-xs.jpg" alt="2 Player Crazy Racer">
+      <div class="game-card-content">
+        <h3>2 Player Crazy Racer</h3>
+        <p>Race on the streets of Long Island in a vintage car, and challenge your friend to a race!</p>
+        <button onclick="loadGame('2-player-crazy-racer')">Play Now</button>
+      </div>
+    </div>
   </div>
 
   <!-- Embed the Game Here -->
-  <div id="gameFrameContainer"></div>
+  <div id="gameFrameContainer" class="game-frame-container"></div>
 
   <!-- JavaScript -->
   <script>
-    // Array of games
+    // Game Data
     const games = {
       'egg-car-racing': {
-        url: 'https://cloud.onlinegames.io/games/2024/construct/289/egg-car-racing/index-og.html', // Remote game URL
+        url: 'https://cloud.onlinegames.io/games/2024/construct/289/egg-car-racing/index-og.html', // Game URL
         title: 'Egg Car Racing'
       },
       'drift-king': {
-        url: 'https://www.onlinegames.io/games/2024/unity/drift-king/index.html', // Remote game URL
+        url: 'https://www.onlinegames.io/games/2024/unity/drift-king/index.html', // Game URL
         title: 'Drift King'
       },
       'block-blast': {
-        url: 'https://cloud.onlinegames.io/games/2024/unity3/block-blast/index-og.html', // Remote game URL
+        url: 'https://cloud.onlinegames.io/games/2024/unity3/block-blast/index-og.html', // Game URL
         title: 'Block Blast'
+      },
+      'hero-rush-tower-defense': {
+        url: 'https://www.onlinegames.io/games/2023/unity/hero-rush-tower-defense/index.html', // Game URL
+        title: 'Hero Rush Tower Defense'
+      },
+      'alien-sky-invasion': {
+        url: 'https://www.onlinegames.io/games/2021/unity3/alien-sky-invasion/index.html', // Game URL
+        title: 'Alien Sky Invasion'
+      },
+      'troll-level': {
+        url: 'https://cloud.onlinegames.io/games/2024/unity2/troll-level/index-og.html', // Game URL
+        title: 'Troll Level'
+      },
+      'highway-racer-2': {
+        url: 'https://www.onlinegames.io/games/2022/unity2/highway-racer-2/index.html', // Game URL
+        title: 'Highway Racer 2'
+      },
+      'bus-subway-runner': {
+        url: 'https://www.onlinegames.io/games/2022/unity/bus-subway-runner/index.html', // Game URL
+        title: 'Bus Subway Runner'
+      },
+      'subway-idle-3d': {
+        url: 'https://www.onlinegames.io/games/2022/unity4/subway-idle-3d/index.html', // Game URL
+        title: 'Subway Idle 3D'
+      },
+      '2-player-crazy-racer': {
+        url: 'https://www.onlinegames.io/games/2022/unity3/2-player-crazy-racer/index.html', // Game URL
+        title: '2 Player Crazy Racer'
       }
     };
 
-    // Load Game Function
+    // Load Game into iframe
     function loadGame(gameKey) {
       const game = games[gameKey];
       if (game) {
@@ -215,13 +317,13 @@
       }
     }
 
-    // Search Game Function
-    document.getElementById('gameSearch').addEventListener('input', function(event) {
-      const searchTerm = event.target.value.toLowerCase();
+    // Search Game Functionality
+    document.getElementById('gameSearch').addEventListener('input', function() {
+      const searchQuery = this.value.toLowerCase();
       const gameCards = document.querySelectorAll('.game-card');
-      gameCards.forEach(function(card) {
+      gameCards.forEach(card => {
         const title = card.querySelector('h3').textContent.toLowerCase();
-        if (title.includes(searchTerm)) {
+        if (title.includes(searchQuery)) {
           card.style.display = 'block';
         } else {
           card.style.display = 'none';
