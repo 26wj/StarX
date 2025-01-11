@@ -17,7 +17,7 @@
       overflow: hidden;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: flex-start; /* Align the content to the top */
       flex-direction: column;
     }
 
@@ -35,8 +35,9 @@
       position: absolute;
       background-color: white;
       border-radius: 50%;
-      opacity: 0.5;
+      opacity: 0.7; /* Make the stars shinier */
       animation: starAnimation 3s linear infinite;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.5); /* Glowing effect */
     }
 
     .title {
@@ -46,11 +47,10 @@
       position: absolute;
       top: 20px; /* Adjust title position from the top */
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%); /* Center the title horizontally */
       z-index: 10;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5);
       pointer-events: none;
-      animation: titleAnimation 5s ease-in-out infinite, glowEffect 1.5s alternate infinite;
     }
 
     @keyframes starAnimation {
@@ -59,29 +59,6 @@
       }
       100% {
         transform: translateY(-1000px) translateX(1000px);
-      }
-    }
-
-    /* Animation for the title */
-    @keyframes titleAnimation {
-      0% {
-        transform: translateX(-50%) scale(1) rotate(0deg);
-      }
-      50% {
-        transform: translateX(-50%) scale(1.2) rotate(10deg);
-      }
-      100% {
-        transform: translateX(-50%) scale(1) rotate(0deg);
-      }
-    }
-
-    /* Glowing effect */
-    @keyframes glowEffect {
-      0% {
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5);
-      }
-      100% {
-        text-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 255, 255, 0.8);
       }
     }
   </style>
@@ -98,8 +75,8 @@
       const star = document.createElement('div');
       star.classList.add('star');
       
-      // Randomize size of the stars
-      const size = Math.random() * 3 + 1; // Stars will range between 1px to 4px
+      // Randomize size of the stars (increase size for bigger stars)
+      const size = Math.random() * 5 + 3; // Stars will range between 3px to 8px
       star.style.width = `${size}px`;
       star.style.height = `${size}px`;
 
