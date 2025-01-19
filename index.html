@@ -4,160 +4,195 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Star X Website</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* General Body Styling */
-        body {
-            font-family: 'Arial', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            color: #fff;
-            text-align: center;
-            background-color: #1e1e1e;
-            overflow: hidden;
-            position: relative;
-            height: 100vh;
+            box-sizing: border-box;
         }
 
-        /* Smooth Animated Background */
-        .background {
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #141414;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+            height: 100vh;
+            position: relative;
+            background: linear-gradient(45deg, #4c9fd4, #0b6f72);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-top: 20vh;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: white;
+            animation: textAnimation 4s ease-out forwards;
+            text-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8);
+        }
+
+        @keyframes textAnimation {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .main-content {
+            display: none;
+            padding-top: 50px;
+            animation: fadeInContent 2s ease-in-out forwards;
+        }
+
+        @keyframes fadeInContent {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .stronghold-button {
+            padding: 20px 40px;
+            background: #00b894;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            color: white;
+            text-transform: uppercase;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 10px 15px rgba(0, 255, 255, 0.3);
+            transition: transform 0.3s ease, background 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stronghold-button:hover {
+            background: #009d7f;
+            transform: translateY(-10px);
+        }
+
+        .stronghold-button:active {
+            transform: translateY(0px);
+            background: #007f66;
+        }
+
+        .instructions {
+            opacity: 0;
+            font-size: 1.2rem;
+            color: #e4e4e4;
+            margin-top: 30px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInInstructions 2s ease-out forwards;
+        }
+
+        @keyframes fadeInInstructions {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .instructions a {
+            color: #00b894;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+
+        .instructions a:hover {
+            color: #009d7f;
+        }
+
+        /* Particle Animation */
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: rgba(0, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: particleAnimation 2s ease-out infinite;
+        }
+
+        @keyframes particleAnimation {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* Floating particle effect for a dreamy look */
+        .particles-container {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            z-index: -1;
-            background: linear-gradient(45deg, #2c3e50, #3498db);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% { background: linear-gradient(45deg, #2c3e50, #3498db); }
-            50% { background: linear-gradient(45deg, #3498db, #9b59b6); }
-            100% { background: linear-gradient(45deg, #9b59b6, #2c3e50); }
-        }
-
-        /* Welcome Section with Better Font and Animation */
-        .header {
-            font-size: 5em;
-            padding-top: 150px;
-            animation: fadeInUp 3s ease-out;
-            color: #fff;
-            text-shadow: 0px 0px 20px rgba(0, 255, 255, 0.8);
-            letter-spacing: 5px;
-            font-family: 'Roboto', sans-serif;
-            animation-delay: 0.5s;
-        }
-
-        @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(50px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Main Content Section - Initially Hidden */
-        .main-content {
-            display: none;
-            margin-top: 100px;
-            animation: fadeIn 3s ease-in-out;
-        }
-
-        /* Stronghold Button Styling */
-        .stronghold-button {
-            padding: 20px 50px;
-            background-color: #00b894;
-            color: white;
-            font-size: 2em;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            text-transform: uppercase;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        /* Button Hover Animation */
-        .stronghold-button:hover {
-            background-color: #009d7f;
-            transform: scale(1.1) translateY(-10px);
-            box-shadow: 0 12px 24px rgba(0, 255, 255, 0.6);
-        }
-
-        /* Instructions Styling */
-        .instructions {
-            font-size: 1.3em;
-            color: #dcdcdc;
-            margin-top: 30px;
-            text-align: left;
-            opacity: 0;
-            animation: fadeIn 2s ease-in-out forwards;
-            margin: 20px auto;
-            max-width: 600px;
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        /* Button Ripple Effect */
-        .instructions a {
-            color: #00b894;
-            text-decoration: none;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header {
-                font-size: 3em;
-            }
-            .stronghold-button {
-                font-size: 1.5em;
-                padding: 15px 40px;
-            }
+            pointer-events: none;
         }
 
     </style>
 </head>
 <body>
-    <!-- Background Section -->
-    <div class="background"></div>
 
-    <!-- Welcome Section (Initial Message) -->
-    <div class="header" id="welcome-text">
+    <!-- Particles Container -->
+    <div class="particles-container" id="particles"></div>
+
+    <!-- Welcome Text -->
+    <div class="header" id="welcomeText">
         Welcome to Star X
     </div>
 
-    <!-- Main Content (Initially Hidden) -->
-    <div class="main-content" id="main-content">
+    <!-- Main Content Section -->
+    <div class="main-content" id="mainContent">
         <h2>Stronghold Crusader HD Maps</h2>
-        <button class="stronghold-button" id="downloadButton">Click Here to Download</button>
+        <button class="stronghold-button" id="downloadButton">Click to Download</button>
 
-        <!-- Instructions Below the Button -->
+        <!-- Instructions Section -->
         <div class="instructions" id="instructions">
             <h3>Installation Instructions:</h3>
             <ol>
-                <li>Go to your PC's <b>C:</b> or <b>D:</b> drive.</li>
-                <li>Navigate to the <b>Steam</b> folder.</li>
-                <li>Then go to <b>steamapps > common</b> directory.</li>
-                <li>Look for the <b>Stronghold Crusader HD</b> folder.</li>
-                <li>Click on the <b>maps</b> folder inside the Stronghold Crusader HD folder.</li>
-                <li>Finally, paste the downloaded maps in this folder.</li>
+                <li>Open your PC’s <b>C:</b> or <b>D:</b> drive.</li>
+                <li>Go to the <b>Steam</b> folder.</li>
+                <li>Navigate to <b>steamapps > common</b> folder.</li>
+                <li>Find the <b>Stronghold Crusader HD</b> folder.</li>
+                <li>Inside, go to the <b>maps</b> folder.</li>
+                <li>Finally, paste the downloaded maps here.</li>
             </ol>
-            <p>Download the maps here: <a href="https://drive.google.com/drive/folders/1phr5A1zWpMHo3BT1c3mmFLjMa97SL8JW?usp=sharing" target="_blank">Download Maps</a></p>
+            <p>Download the maps from: <a href="https://drive.google.com/drive/folders/1phr5A1zWpMHo3BT1c3mmFLjMa97SL8JW?usp=sharing" target="_blank">Google Drive</a></p>
         </div>
     </div>
 
-    <!-- JavaScript to Show Content -->
+    <!-- JavaScript for Interactivity -->
     <script>
-        // Delay Welcome Text and Show Main Content
+        // Display particles floating around the screen
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.top = Math.random() * window.innerHeight + 'px';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            document.getElementById('particles').appendChild(particle);
+
+            // Remove particle after animation ends
+            setTimeout(() => particle.remove(), 2000);
+        }
+
+        // Create particles every 100ms for a lively effect
+        setInterval(createParticle, 100);
+
+        // Show the main content after the welcome text disappears
         setTimeout(function() {
-            document.getElementById('welcome-text').style.display = 'none'; // Hide welcome text
-            document.getElementById('main-content').style.display = 'block'; // Show main content
+            document.getElementById('welcomeText').style.display = 'none'; // Hide welcome text
+            document.getElementById('mainContent').style.display = 'block'; // Show main content
         }, 4000); // Delay for 4 seconds
 
-        // Show Instructions when Clicking Download Button
+        // Show instructions when the download button is clicked
         document.getElementById('downloadButton').addEventListener('click', function() {
             document.getElementById('instructions').style.opacity = '1';
         });
