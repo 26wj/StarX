@@ -112,7 +112,15 @@
             color: #009d7f;
         }
 
-        /* Particle Animation */
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
         .particle {
             position: absolute;
             width: 5px;
@@ -125,16 +133,6 @@
         @keyframes particleAnimation {
             0% { transform: scale(0); opacity: 1; }
             100% { transform: scale(1.5); opacity: 0; }
-        }
-
-        /* Floating particle effect for a dreamy look */
-        .particles-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
         }
 
     </style>
@@ -192,9 +190,12 @@
             document.getElementById('mainContent').style.display = 'block'; // Show main content
         }, 4000); // Delay for 4 seconds
 
-        // Show instructions when the download button is clicked
+        // Auto-download when clicking the button
         document.getElementById('downloadButton').addEventListener('click', function() {
-            document.getElementById('instructions').style.opacity = '1';
+            const downloadLink = 'https://drive.google.com/uc?id=1phr5A1zWpMHo3BT1c3mmFLjMa97SL8JW&export=download';
+            
+            window.location.href = downloadLink;  // Trigger the download
+            document.getElementById('instructions').style.opacity = '1'; // Show the instructions
         });
     </script>
 </body>
