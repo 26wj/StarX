@@ -3,200 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star X Website</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Modern Animated Website</title>
     <style>
+        :root {
+            --primary: #7b2cbf;
+            --secondary: #c77dff;
+            --accent: #e0aaff;
+            --text: #f8f9fa;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            cursor: none;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #141414;
-            overflow: hidden;
-            color: white;
-            text-align: center;
-            height: 100vh;
-            position: relative;
-            background: linear-gradient(45deg, #4c9fd4, #0b6f72);
-            background-size: 400% 400%;
-            animation: gradientAnimation 15s ease infinite;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #240046, #3c096c);
+            color: var(--text);
+            overflow-x: hidden;
         }
 
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            transition: transform 0.3s, opacity 0.3s;
+            mix-blend-mode: difference;
+            z-index: 9999;
         }
 
-        .header {
-            font-size: 4rem;
-            font-weight: bold;
-            margin-top: 20vh;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: white;
-            animation: textAnimation 4s ease-out forwards;
-            text-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8);
+        .terms-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            animation: float 3s ease-in-out infinite;
+            transform: translateY(0);
         }
 
-        @keyframes textAnimation {
-            0% { opacity: 0; transform: translateY(50px); }
-            100% { opacity: 1; transform: translateY(0); }
+        .terms-content {
+            max-height: 60vh;
+            overflow-y: auto;
+            padding: 1rem;
+            line-height: 1.6;
         }
 
-        .main-content {
-            display: none;
-            padding-top: 50px;
-            animation: fadeInContent 2s ease-in-out forwards;
-        }
-
-        @keyframes fadeInContent {
-            0% { opacity: 0; transform: translateY(50px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .stronghold-button {
-            padding: 20px 40px;
-            background: #00b894;
+        .agree-button {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             border: none;
-            border-radius: 12px;
-            font-size: 1.8rem;
+            padding: 1rem 2rem;
             color: white;
-            text-transform: uppercase;
-            cursor: pointer;
-            outline: none;
-            box-shadow: 0 10px 15px rgba(0, 255, 255, 0.3);
-            transition: transform 0.3s ease, background 0.3s ease;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
-            z-index: 1;
+            overflow: hidden;
         }
 
-        .stronghold-button:hover {
-            background: #009d7f;
-            transform: translateY(-10px);
-        }
-
-        .stronghold-button:active {
-            transform: translateY(0px);
-            background: #007f66;
-        }
-
-        .instructions {
-            opacity: 0;
-            font-size: 1.2rem;
-            color: #e4e4e4;
-            margin-top: 30px;
-            text-align: left;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInInstructions 2s ease-out forwards;
-        }
-
-        @keyframes fadeInInstructions {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .instructions a {
-            color: #00b894;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.2s ease;
-        }
-
-        .instructions a:hover {
-            color: #009d7f;
-        }
-
-        .particles-container {
-            position: absolute;
+        .success-screen {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            display: none;
+            place-items: center;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
         }
 
-        .particle {
+        .success-content {
+            text-align: center;
+            animation: scaleUp 0.5s ease-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes cursorAnim {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.5); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .button-ripple {
             position: absolute;
-            width: 5px;
-            height: 5px;
-            background-color: rgba(0, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
             border-radius: 50%;
-            animation: particleAnimation 2s ease-out infinite;
+            animation: ripple 0.6s linear;
         }
 
-        @keyframes particleAnimation {
-            0% { transform: scale(0); opacity: 1; }
-            100% { transform: scale(1.5); opacity: 0; }
+        @keyframes ripple {
+            from { width: 0; height: 0; opacity: 1; }
+            to { width: 500px; height: 500px; opacity: 0; }
         }
 
+        @media (max-width: 768px) {
+            .terms-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            .custom-cursor {
+                display: none;
+            }
+
+            * {
+                cursor: default;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="custom-cursor"></div>
 
-    <!-- Particles Container -->
-    <div class="particles-container" id="particles"></div>
-
-    <!-- Welcome Text -->
-    <div class="header" id="welcomeText">
-        Welcome to Star X
+    <div class="terms-container">
+        <h1>Welcome to GameTrade Pro🌟</h1>
+        <div class="terms-content">
+            <h2>Terms of Service</h2>
+             <p>This Terms of Service Agreement ("Agreement") is a legally binding contract between you ("User") and Elite PUBG ("Company"). By accessing and using our website and services, you agree to be bound by this Agreement, and any amendments or modifications made by us at any time. Your continued use of the site signifies your acceptance of all the terms and conditions set forth herein, even if you do not read every detail in its entirety.</p>
+      
+      <p>You acknowledge and agree that the Company operates an online platform that facilitates the buying and selling of PUBG accounts. All transactions made on this platform are subject to the provisions of this Agreement, which have been designed to cover every possible scenario, dispute, and contingency that may arise during your use of the service.</p>
+      
+      <p>The services provided by Elite PUBG include, but are not limited to, account listings, transaction facilitation, account verification, and dispute resolution. Each service is provided "as-is" without any warranties, expressed or implied, and you agree that the risk of any issues arising from these services is solely your responsibility.</p>
+      
+      <p>When purchasing an account through our platform, you agree that the account is transferred in its current condition. It is your duty to verify the accuracy, completeness, and functionality of the account before finalizing the purchase. Elite PUBG will not be held responsible for any discrepancies, errors, or issues that may become apparent after the transaction has been completed.</p>
+      <p>All financial transactions processed on this platform are final. There will be no refunds, reversals, or chargebacks except where explicitly required by applicable law. By engaging in any transaction, you acknowledge that you have read and agreed to our payment and refund policies, and that any disputes arising will be resolved in accordance with this Agreement.</p>
+      
+      <p>Elite PUBG implements a range of security measures to protect the integrity of our platform and the data of our users. However, no system is entirely secure, and you agree that your use of the site is at your own risk. The Company disclaims all liability for any unauthorized access, data breaches, or other security incidents that may occur.</p>
+      
+      <p>You agree to indemnify, defend, and hold harmless Elite PUBG, its officers, directors, employees, agents, and affiliates from and against any and all claims, damages, obligations, losses, liabilities, costs, or expenses arising from your use of the site, violation of this Agreement, or infringement of any third-party rights. This indemnification obligation shall survive the termination or expiration of this Agreement.</p>
+      
+      <p>In the event of any disputes arising from or relating to this Agreement or your use of the platform, you agree to submit such disputes to binding arbitration in accordance with the rules of the jurisdiction in which Elite PUBG is based. You hereby waive any right to pursue legal action in a court of law or to participate in any class action lawsuit, except as otherwise provided by mandatory law.</p>
+      
+      <p>Elite PUBG reserves the right to modify, update, or revise this Agreement at any time without prior notice. It is your responsibility to periodically review the Agreement to ensure that you are aware of any changes. Your continued use of the site after the posting of any modifications constitutes your acceptance of those changes.</p>
+      
+      <p>This Agreement constitutes the entire understanding between you and Elite PUBG regarding your use of our platform and supersedes all prior or contemporaneous communications, whether electronic, oral, or written. No modification or waiver of any provision of this Agreement shall be effective unless it is in writing and signed by an authorized representative of the Company.</p>
+      
+      <p>You acknowledge that Elite PUBG does not guarantee the accuracy, reliability, or quality of the accounts listed on our platform. All transactions are made at your own risk, and you agree that the Company shall not be liable for any losses or damages resulting from your reliance on the information provided on the site.</p>
+      
+      <p>By using this platform, you consent to the collection, use, and disclosure of your personal data in accordance with our Privacy Policy, which is incorporated by reference into this Agreement. This includes, but is not limited to, your name, contact information, transaction history, and any other data you provide during your interaction with the site.</p>
+      
+      <p>You are solely responsible for maintaining the confidentiality of your account credentials, including your username and password. Any activities conducted through your account are your sole responsibility, and you agree to immediately notify Elite PUBG of any unauthorized use or breach of security.</p>
+      
+      <p>The Company is not responsible for any content posted by users on the platform. You agree that any materials, including text, images, and other data submitted to the site, do not infringe on any third-party intellectual property rights, and you grant Elite PUBG a non-exclusive, royalty-free, perpetual, and irrevocable license to use, modify, and distribute such content as necessary for the operation of the platform.</p>
+      
+      <p>In no event shall Elite PUBG be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of the site or these Terms, even if advised of the possibility of such damages. This limitation of liability applies to all claims, whether based in contract, tort, strict liability, or any other legal theory.</p>
+      
+      <p>You agree to comply with all applicable laws and regulations in connection with your use of the site. You further agree not to engage in any conduct that may be deemed fraudulent, illegal, or harmful to the integrity of the platform. Elite PUBG reserves the right to suspend or terminate your account if you are found to be in violation of these terms.</p>
+      
+      <p>This Agreement shall be governed by and construed in accordance with the laws of the jurisdiction in which Elite PUBG is headquartered, without regard to its conflict of laws provisions. Any legal action or proceeding arising under this Agreement shall be brought exclusively in the courts of the said jurisdiction.</p>
+      
+      <p>Force majeure shall apply in the event that any party is unable to perform its obligations under this Agreement due to circumstances beyond its control, including but not limited to natural disasters, acts of war, terrorism, labor disputes, or governmental actions. In such cases, performance is suspended for the duration of the force majeure event.</p>
+      
+      <p>You agree that the failure of Elite PUBG to enforce any right or provision of this Agreement shall not constitute a waiver of such right or provision unless acknowledged and agreed to by the Company in writing. The rights and remedies provided herein are cumulative and not exclusive of any rights provided by law.</p>
+      
+      <p>Elite PUBG makes no representations or warranties regarding the timeliness, continuity, or security of the site. We reserve the right to modify, suspend, or discontinue any aspect of the platform at any time without prior notice or liability to you or any third party.</p>
+      
+      <p>You acknowledge that by using this site, you are accepting the risks associated with online transactions, including the possibility of technical failures, data loss, or security breaches. The Company shall not be liable for any damages arising from such events.</p>
+      
+      <p>This Agreement may be assigned by Elite PUBG at its sole discretion. You may not assign or transfer any rights or obligations under this Agreement without the prior written consent of Elite PUBG. Any unauthorized assignment shall be null and void.</p>
+      
+      <p>The headings used in this Agreement are for convenience only and shall not affect the interpretation or construction of the terms herein. In the event of any conflict between the headings and the substantive provisions, the latter shall prevail.</p>
+      
+      <p>By accessing the site, you acknowledge that you have read, understood, and voluntarily agreed to be bound by every provision of this Agreement. If you do not agree to these terms, you must immediately cease using the site and its services.</p>
+      
+      <p>This Agreement contains a number of provisions that limit the rights of consumers. Some jurisdictions do not allow the exclusion or limitation of incidental or consequential damages, so some of the above limitations may not apply to you. In such cases, the liability of Elite PUBG shall be limited to the maximum extent permitted by law.</p>
+      
+      <p>In addition to the terms outlined above, you further agree that any disputes arising out of or related to these Terms or the use of the site shall be resolved through informal negotiations between you and Elite PUBG. If such negotiations fail to resolve the dispute within a reasonable time frame, the matter will be submitted to binding arbitration as specified in this Agreement.</p>
+      
+      <p>The exhaustive nature of this Agreement is intended to ensure that all potential risks, liabilities, and responsibilities are thoroughly addressed. You acknowledge that you have been provided with ample opportunity to review this Agreement and that you fully understand its implications.</p>
+      
+      <p>Any notices or communications required or permitted under this Agreement shall be given in writing and shall be deemed effective when delivered in person, sent via email, or mailed by registered or certified mail to the address provided by Elite PUBG on the website.</p>
+      
+      <p>This Agreement does not create any partnership, joint venture, or employment relationship between you and Elite PUBG. Nothing in this Agreement shall be construed to grant either party any rights or benefits under any third-party agreements or arrangements.</p>
+      
+      <p>You agree that any failure by Elite PUBG to enforce any provision of this Agreement shall not be construed as a waiver of future enforcement of that or any other provision. The rights and remedies provided herein are cumulative and may be exercised concurrently or independently of one another.</p>
+      
+      <p>The language used in this Agreement is intended to be as clear and precise as possible, but it may be interpreted in various ways. You acknowledge that any ambiguities in this Agreement shall not be construed against Elite PUBG, and that this Agreement shall be interpreted fairly and in accordance with its plain meaning.</p>
+      
+      <p>You further agree that any attempt by you to modify, alter, or circumvent the terms of this Agreement through the use of automated systems, scripts, or other technological means is strictly prohibited. Elite PUBG reserves the right to take legal action against any such attempts.</p>
+      
+      <p>This Agreement is a dynamic document and may be updated periodically to reflect changes in our business practices, technological advancements, or legal requirements. It is your responsibility to ensure that you are familiar with the current version of this Agreement at all times.</p>
+      
+      <p>In the event that any portion of this Agreement is deemed invalid or unenforceable by a court of competent jurisdiction, such portion shall be severed from the remainder of the Agreement, which will remain in full force and effect. The invalid or unenforceable provision shall be replaced by a valid and enforceable provision that most closely matches the intent of the original provision.</p>
+      
+      <p>You agree that any disputes, claims, or controversies arising out of or related to this Agreement shall be resolved on an individual basis and not as part of a class or collective action. The rights granted under this Agreement are personal to you and are non-transferable.</p>
+      
+      <p>The terms and conditions set forth in this Agreement shall be deemed to have been accepted by you upon your first use of the Elite PUBG website and shall continue to bind you for as long as you use the site. Even if you do not actively acknowledge each clause, your conduct on the site will be deemed as evidence of your acceptance of all the terms herein.</p>
+      
+      <p>Any delay or failure by Elite PUBG in exercising any right, power, or remedy under this Agreement shall not constitute a waiver of that or any other right, power, or remedy, and shall not prevent Elite PUBG from enforcing the terms of this Agreement in the future.</p>
+      
+      <p>Elite PUBG reserves the right to monitor all activities on the site and to collect and analyze usage data for the purposes of improving our services and enforcing the terms of this Agreement. By using the site, you consent to such monitoring and data collection.</p>
+      
+      <p>You acknowledge that the legal relationship between you and Elite PUBG is governed exclusively by this Agreement. Any prior or contemporaneous agreements, representations, or understandings, whether oral or written, are superseded by this Agreement and shall have no further force or effect.</p>
+      
+      <p>The provisions of this Agreement shall be binding upon you, your heirs, executors, administrators, successors, and permitted assigns. You agree not to assign or transfer any rights or obligations under this Agreement without the prior written consent of Elite PUBG.</p>
+      
+      <p>In addition to the terms stated above, you agree to comply with all rules, guidelines, and instructions provided on the Elite PUBG website or communicated to you through our customer support channels. Failure to adhere to these rules may result in immediate suspension or termination of your account without prior notice.</p>
+      
+      <p>You hereby expressly waive any rights to claim that any aspect of this Agreement is unfair, unconscionable, or unenforceable under applicable law. By using the site, you acknowledge that you have had the opportunity to review this Agreement in detail and that you voluntarily accept all its terms.</p>
+      
+      <p>This Agreement is intended to protect the interests of both the Company and its users. It is designed to provide a comprehensive framework that governs the use of the site, the processing of transactions, and the resolution of disputes in a manner that is both equitable and legally enforceable.</p>
+      
+      <p>You agree that any content, links, or information provided by Elite PUBG, whether through the website or other communications, is offered for informational purposes only and should not be construed as an endorsement or recommendation. The ultimate responsibility for verifying the accuracy and suitability of such content lies with you.</p>
+      
+      <p>By clicking the "I Agree" button or by continuing to use the Elite PUBG website, you are acknowledging that you have read, understood, and fully accepted every provision of this Agreement, including any amendments or updates that may be made in the future. Your acceptance is binding and constitutes a waiver of any claims of ignorance or misunderstanding of the terms.</p>
+      
+      <p>This Agreement is presented in a comprehensive and exhaustive manner to ensure that every possible aspect of our service is addressed. You acknowledge that the sheer volume and complexity of this document serve to fully inform you of all potential risks and responsibilities associated with using the platform.</p>
+      
+      <p>You further agree that, regardless of whether you have read every word of this Agreement, your use of the site indicates your full acceptance of all terms and conditions set forth herein. It is your responsibility to periodically review this document for any changes that may affect your rights or obligations.</p>
+      
+      <p>Elite PUBG reserves the right to take unilateral action, including but not limited to modifying, suspending, or terminating access to the site, in the event of any breach or violation of this Agreement. Such actions may be taken without prior notice or liability on the part of the Company.</p>
+      <p>If you elect to sell your account via our platform, you are required to ensure that all external links, metadata, and identifying information are completely removed from the account prior to listing. This condition is essential to maintain the privacy and integrity of the transaction. Only after confirming the removal of such data will the payment be processed in full to you.</p>
+      <p>Should any dispute arise from or in connection with this Agreement, the prevailing party shall be entitled to recover all costs and expenses, including reasonable attorney's fees, incurred in connection with the resolution of such dispute.</p>
+      
+      
+            <!-- Add more content -->
+        </div>
+        <button class="agree-button">I Agree</button>
     </div>
 
-    <!-- Main Content Section -->
-    <div class="main-content" id="mainContent">
-        <h2>Stronghold Crusader HD Maps</h2>
-        <button class="stronghold-button" id="downloadButton">Click to Download</button>
-
-        <!-- Instructions Section -->
-        <div class="instructions" id="instructions">
-            <h3>Installation Instructions:</h3>
-            <ol>
-                <li>Open your PC’s <b>C:</b> or <b>D:</b> drive.</li>
-                <li>Go to the <b>Steam</b> folder.</li>
-                <li>Navigate to <b>steamapps > common</b> folder.</li>
-                <li>Find the <b>Stronghold Crusader HD</b> folder.</li>
-                <li>Inside, go to the <b>maps</b> folder.</li>
-                <li>Finally, paste the downloaded maps here.</li>
-            </ol>
-            <p>Download the maps from: <a href="https://drive.google.com/drive/folders/1phr5A1zWpMHo3BT1c3mmFLjMa97SL8JW?usp=sharing" target="_blank">Google Drive</a></p>
+    <div class="success-screen">
+        <div class="success-content">
+            <div style="font-size: 5rem; animation: float 3s infinite">🎉</div>
+            <h1 style="margin: 2rem 0">Now You Can Move Forward with the Deal!</h1>
+            <button class="agree-button" onclick="location.reload()">Go Back</button>
         </div>
     </div>
 
-    <!-- JavaScript for Interactivity -->
     <script>
-        // Display particles floating around the screen
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            particle.style.top = Math.random() * window.innerHeight + 'px';
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            document.getElementById('particles').appendChild(particle);
-
-            // Remove particle after animation ends
-            setTimeout(() => particle.remove(), 2000);
-        }
-
-        // Create particles every 100ms for a lively effect
-        setInterval(createParticle, 100);
-
-        // Show the main content after the welcome text disappears
-        setTimeout(function() {
-            document.getElementById('welcomeText').style.display = 'none'; // Hide welcome text
-            document.getElementById('mainContent').style.display = 'block'; // Show main content
-        }, 4000); // Delay for 4 seconds
-
-        // Auto-download when clicking the button
-        document.getElementById('downloadButton').addEventListener('click', function() {
-            const downloadLink = 'https://drive.google.com/uc?id=1phr5A1zWpMHo3BT1c3mmFLjMa97SL8JW&export=download';
-            
-            window.location.href = downloadLink;  // Trigger the download
-            document.getElementById('instructions').style.opacity = '1'; // Show the instructions
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
         });
+
+        // Button click effect
+        document.querySelectorAll('.agree-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                // Ripple effect
+                const ripple = document.createElement('span');
+                ripple.className = 'button-ripple';
+                ripple.style.left = e.clientX - button.offsetLeft + 'px';
+                ripple.style.top = e.clientY - button.offsetTop + 'px';
+                button.appendChild(ripple);
+
+                // Handle agreement
+                if(button.textContent === 'I Agree') {
+                    document.querySelector('.terms-container').style.display = 'none';
+                    document.querySelector('.success-screen').style.display = 'grid';
+                }
+
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Mobile detection
+        if (window.innerWidth <= 768) {
+            cursor.style.display = 'none';
+        }
     </script>
 </body>
 </html>
